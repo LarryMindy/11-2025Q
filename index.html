@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>60s & 70s Music Journeys Quiz</title>
+  <style>
+    body {
+      font-family: 'Calibri', sans-serif;
+      background: linear-gradient(to right, #9C2831, #9C2831);
+      padding: 20px;
+      color: #2c2c2c;
+    }
+    .language-switch {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: black;
+      color: white;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 10px 0 20px 10px;
+    }
+    .language-switch:hover { background-color: #444; }
+
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      font-size: 2em;
+      color: #d35400;
+    }
+    .question {
+      font-weight: bold;
+      margin-top: 25px;
+      font-size: 1.1em;
+      animation: floatUp 0.6s ease forwards;
+    }
+    .options button {
+      display: block;
+      color: white;
+      margin: 8px 0;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      background-color: #857C31;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1.1em;
+    }
+    .options button:hover { background-color: #C5B001; }
+
+    .explanation {
+      color: #006400;
+      margin-top: 10px;
+      font-style: italic;
+      opacity: 0;
+    }
+    .explanation.show {
+      animation: zoomInLeft 0.6s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .banner {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    #score {
+      position: sticky;
+      top: 0;
+      background-color: #FFFF00;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3em;
+      border-bottom: 2px solid #ccc;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .final-message {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #9C2831;
+      background-color: #FFF8DC;
+      border: 2px solid #9C2831;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      animation: floatUp 0.6s ease forwards;
+    }
+.back-button {
+  display: block;
+  background-color: #a02b2b;
+  color: white;
+  text-decoration: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  line-height: 1.5;
+  text-align: center;
+  margin: 40px auto 30px;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  white-space: normal;
+}
+
+.back-button:hover {
+  box-shadow: 0 0 12px 4px rgba(193, 60, 60, 0.6); /* red glow */
+  transform: scale(1.05);
+  background-color: #b5303c;
+}
+    @keyframes slideFadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .return-button {
+      display: block;
+      padding: 10px 20px;
+      background-color: #9C2831;
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1em;
+      margin: 30px auto 20px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .return-button:hover { background-color: #b5303c; }
+
+    .footer {
+      margin: 40px auto 0;
+      text-align: center;
+      font-size: 0.95em;
+      max-width: 768px;
+      color: #444;
+    }
+    .footer a { color: #9C2831; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media screen and (max-width: 768px) {
+      .options button { font-size: 1em; padding: 14px; line-height: 1.3; }
+      .return-button {
+        font-size: 0.9em; padding: 12px 16px; max-width: 90%;
+        margin: 20px auto; text-align: center;
+      }
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomInLeft {
+      from { opacity: 0; transform: translateX(-50px) scale(0.95); }
+      to   { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    #completion-button {
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <img src="September Quiz Banner.jpg" alt="September Quiz Banner" class="banner">
+
+    <a href="https://larrymindy.github.io/09-2025QH/" class="language-switch" target="_blank" rel="noopener noreferrer">עברית</a>
+
+    <h2>Larry and Mindy's September Quiz<br>
+      Musical Journeys of the 60s & 70s</h2>
+    <p id="score">0 correct answers (out of 15)</p>
+    <div id="quiz"></div>
+
+    <img src="divider H-C.jpg" alt="divider H-C.jpg" class="banner">
+
+    <div class="footer">
+      <p><strong style="color: #9C2831; font-size: 1.1em;">Contact Us</strong><br>
+        054-6446396 / 050-5921628<br>
+        <a href="mailto:larry@larryandmindy.co.il?subject=E-mail from the Larry and Mindy website" style="color: #9C2831;">larry@larryandmindy.co.il</a><br>
+        or<br>
+        <a href="mailto:mindy@larryandmindy.co.il?subject=E-mail from the Larry and Mindy website" style="color: #9C2831;">mindy@larryandmindy.co.il</a>
+      </p>
+      <p>
+        <a href="http://www.larrymindy.com/" target="_blank" style="color: #9C2831; font-weight: bold;">Visit our main website</a>
+      </p>
+    </div>
+  </div>
+<script>
+const quiz = [
+  {
+    question: "Which U.S. state is the destination in the song “Take Me Home, Country Roads”?",
+    options: ["Tennessee", "Kentucky", "West Virginia", "Virginia"],
+    answer: 2,
+    explanation: "John Denver’s classic celebrates West Virginia’s mountains and rural beauty—it became the state’s anthem."
+  },
+  {
+    question: "Which Beatles song begins with the line “Flew in from Miami Beach BOAC”?",
+    options: ["Back in the U.S.S.R.", "Come Together", "Ticket to Ride", "Day Tripper"],
+    answer: 0,
+    explanation: "‘Back in the U.S.S.R.’ opens The White Album with a parody of Chuck Berry and the Beach Boys."
+  },
+  {
+    question: "What Simon & Garfunkel song mentions traveling on a Greyhound bus?",
+    options: ["The Boxer", "America", "Homeward Bound", "Cecilia"],
+    answer: 1,
+    explanation: "Paul Simon wrote ‘America’ as a metaphor for searching meaning—its Greyhound bus journey is literal and symbolic."
+  },
+  {
+    question: "Jimmy Webb wrote a song for Glen Campbell featuring a telephone-wire technician. Which city did the technician work in (and around)?",
+    options: ["Wichita, Kansas", "Tulsa, Oklahoma", "Amarillo, Texas", "Des Moines, Iowa"],
+    answer: 0,
+    explanation: "Jimmy Webb’s ‘Wichita Lineman’ immortalized a lonely technician in Kansas, blending country with orchestral pop."
+  },
+  {
+    question: "Which song by The Beach Boys celebrates driving across America in a custom car, with car parts described?",
+    options: ["I Get Around", "Surfin’ U.S.A.", "Little Deuce Coupe", "Fun, Fun, Fun"],
+    answer: 2,
+    explanation: "‘Little Deuce Coupe’ is the Beach Boys’ ode to a souped-up Ford hot rod—pure car culture in song."
+  },
+  {
+    question: "What song by Neil Diamond includes the lyric “LA’s fine, the sun shines most the time”?",
+    options: ["Cracklin’ Rosie", "I Am... I Said", "Sweet Caroline", "Song Sung Blue"],
+    answer: 1,
+    explanation: "‘I Am... I Said’ reflects Neil Diamond’s homesickness and career struggles while living in Los Angeles."
+  },
+  {
+    question: "Which song by Johnny Cash lists dozens of cities he’s been to (over 90 cities!)?",
+    options: ["Riders in the Sky", "I’ve Been Everywhere", "I Walk the Line", "A Boy Named Sue"],
+    answer: 1,
+    explanation: "Johnny Cash’s cover of ‘I’ve Been Everywhere’ rattles off nearly 100 towns in rapid-fire storytelling style."
+  },
+  {
+    question: "Who wrote the song “City of New Orleans”, describing a train ride from Chicago to New Orleans on the Illinois Central Railroad?",
+    options: ["Arlo Guthrie", "Willie Nelson", "Steve Goodman", "Johnny Cash"],
+    answer: 2,
+    explanation: "Steve Goodman wrote ‘City of New Orleans’—Arlo Guthrie popularized it; it became a folk-country standard."
+  },
+  {
+    question: "What song by The Doors includes the lyric “Well, I woke up this mornin' / And I got myself a beer / The future's uncertain / And the end is always near” and evokes a road trip vibe?",
+    options: ["Been Down So Long", "Riders on the Storm", "L.A. Woman", "Roadhouse Blues"],
+    answer: 3,
+    explanation: "‘Roadhouse Blues’ by The Doors is a gritty anthem of freedom and unpredictability on the open road."
+  },
+  {
+    question: "Sung by Gordon Lightfoot, where is \"The Wreck of the Edmund Fitzgerald\"?",
+    options: ["Atlantic Ocean", "Lake Superior", "Hudson Bay", "Gulf of St. Lawrence"],
+    answer: 1,
+    explanation: "Gordon Lightfoot told the true story of the Edmund Fitzgerald sinking on Lake Superior in 1975."
+  },
+  {
+    question: "What song by Led Zeppelin includes references to traveling “on a midnight sun” and “the land of the ice and snow”?",
+    options: ["Kashmir", "Immigrant Song", "Ramble On", "Over the Hills and Far Away"],
+    answer: 1,
+    explanation: "Led Zeppelin’s ‘Immigrant Song’ evokes Viking voyages with its references to northern lands and conquest."
+  },
+  {
+    question: "What song sung by Janis Joplin talks about hitchhiking?",
+    options: ["Piece of My Heart", "Me and Bobby McGee", "Cry Baby", "Summertime"],
+    answer: 1,
+    explanation: "Janis Joplin’s ‘Me and Bobby McGee’ captures a free-spirited road romance; it became her signature hit."
+  },
+  {
+    question: "What song by The Band includes the lyric “Was feeling 'bout half past dead / I just need someplace / Where I can lay my head” and depicts the travels of a man through Nazareth, Pennsylvania?",
+    options: ["The Night They Drove Old Dixie Down", "Life Is a Carnival", "The Weight", "Up on Cripple Creek"],
+    answer: 2,
+    explanation: "The Band’s ‘The Weight’ narrates a traveler’s encounters in Nazareth, Pennsylvania—an allegory of burden and grace."
+  },
+  {
+    question: "What song by Billy Joel includes references to traveling through the Bronx and Long Island?",
+    options: ["Piano Man", "Movin’ Out (Anthony’s Song)", "Scenes from an Italian Restaurant", "New York State of Mind"],
+    answer: 3,
+    explanation: "Billy Joel’s ‘New York State of Mind’ is a love letter to his city, contrasting travel with staying home."
+  },
+  {
+    question: "Who wrote the song \"Country Road\"?",
+    options: ["James Taylor", "John Denver", "Jim Croce", "Cat Stevens"],
+    answer: 0,
+    explanation: "Not to be confused with John Denver's \"Take Me Home, Country Roads\", James Taylor's \"Country Road\" was inspired by his walks along Somerset Street in Belmont, Massachusetts, near the hospital where he was treated for depression. It captures themes of freedom, nature, solitude, and spirituality, and was also reminiscent of hitchhiking days in Martha's Vineyard for his friend and guitarist, Danny Kortchmar."
+  }
+];
+
+const quizDiv = document.getElementById('quiz');
+let score = 0;
+const scoreDisplay = document.getElementById('score');
+let currentIndex = 0;
+
+function showQuestion(index) {
+  const q = quiz[index];
+  const questionDiv = document.createElement('div');
+  questionDiv.className = 'question';
+  questionDiv.textContent = `${index + 1}. ${q.question}`;
+
+  const optionsDiv = document.createElement('div');
+  optionsDiv.className = 'options';
+
+  const explanationDiv = document.createElement('div');
+  explanationDiv.className = 'explanation';
+  explanationDiv.textContent = q.explanation;
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = opt;
+
+    btn.onclick = () => {
+      const alreadyAnswered = Array.from(optionsDiv.children).some(b => b.disabled);
+      if (alreadyAnswered) return;
+
+      if (i === q.answer) {
+        btn.style.backgroundColor = '#072EF3';
+        score++;
+        scoreDisplay.textContent = `${score} correct answers (out of 15)`;
+      } else {
+        btn.style.backgroundColor = '#CD0101';
+        const correctBtn = optionsDiv.children[q.answer];
+        correctBtn.style.backgroundColor = '#039303';
+      }
+      Array.from(optionsDiv.children).forEach(b => b.disabled = true);
+      explanationDiv.classList.add('show');
+
+      const timeToNext = 3000;
+      if (index + 1 < quiz.length) {
+        setTimeout(() => showQuestion(index + 1), timeToNext);
+      } else {
+        setTimeout(() => {
+          const doneMsg = document.createElement('div');
+          doneMsg.className = 'final-message';
+          doneMsg.textContent = 'All questions answered — nice job!';
+          quizDiv.appendChild(doneMsg);
+
+         const backLink = document.createElement('a');
+          backLink.className = 'back-button';
+          backLink.href = 'https://quiz.larrymindy.com/09-2025.php';
+          backLink.target = '_blank';
+          backLink.rel = 'noopener noreferrer';
+          backLink.innerHTML = 'Back to the introduction page<br>and previous quizzes...';
+          quizDiv.appendChild(backLink);
+
+        }, timeToNext);
+      }
+    };
+
+    optionsDiv.appendChild(btn);
+  });
+
+  questionDiv.appendChild(optionsDiv);
+  questionDiv.appendChild(explanationDiv);
+  quizDiv.appendChild(questionDiv);
+}
+
+showQuestion(currentIndex);
+</script>
+</body>
+</html>
